@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-count-by-occupation"
+version = "0.1.0"
+description = "全国の職種別有効求人数を e-Stat から取得する CLI"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["xlrd>=2.0.2"]
+
+[project.scripts]
+job-count-by-occupation = "job_count_by_occupation.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

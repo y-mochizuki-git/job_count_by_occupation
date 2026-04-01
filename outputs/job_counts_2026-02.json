@@ -1,0 +1,623 @@
+[
+  {
+    "occupation_name": "職業計",
+    "job_count": 2072897,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "管理的職業従事者",
+    "job_count": 5974,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "専門的・技術的職業従事者",
+    "job_count": 487600,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製造技術者（開発）",
+    "job_count": 14872,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製造技術者（開発を除く）",
+    "job_count": 12102,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "建築・土木・測量技術者",
+    "job_count": 57818,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "情報処理・通信技術者",
+    "job_count": 50453,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他の技術者",
+    "job_count": 7730,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "医師，歯科医師，獣医師，薬剤師",
+    "job_count": 9003,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "保健師，助産師，看護師",
+    "job_count": 100571,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "医療技術者",
+    "job_count": 42191,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他の保健医療従事者",
+    "job_count": 20234,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "社会福祉専門職業従事者",
+    "job_count": 129425,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "美術家，デザイナー，写真家，映像撮影者",
+    "job_count": 4489,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他の専門的職業",
+    "job_count": 38712,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "事務従事者",
+    "job_count": 221065,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "一般事務従事者",
+    "job_count": 158159,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "会計事務従事者",
+    "job_count": 18027,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生産関連事務従事者",
+    "job_count": 14089,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "営業・販売事務従事者",
+    "job_count": 17265,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "外勤事務従事者",
+    "job_count": 895,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "運輸・郵便事務従事者",
+    "job_count": 7245,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "事務用機器操作員",
+    "job_count": 5385,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "販売従事者",
+    "job_count": 181730,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "商品販売従事者",
+    "job_count": 101912,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "販売類似職業従事者",
+    "job_count": 4793,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "営業職業従事者",
+    "job_count": 75025,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "サービス職業従事者",
+    "job_count": 471576,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "家庭生活支援サービス職業従事者",
+    "job_count": 1395,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "介護サービス職業従事者",
+    "job_count": 191234,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "保健医療サービス職業従事者",
+    "job_count": 23623,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生活衛生サービス職業従事者",
+    "job_count": 31998,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "飲食物調理従事者",
+    "job_count": 108338,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "接客・給仕職業従事者",
+    "job_count": 73549,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "居住施設・ビル等管理人",
+    "job_count": 9005,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他のサービス職業従事者",
+    "job_count": 32434,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "保安職業従事者",
+    "job_count": 88881,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "農林漁業従事者",
+    "job_count": 16723,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生産工程従事者",
+    "job_count": 196375,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生産設備制御・監視従事者（金属製品）セ",
+    "job_count": 3919,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生産設備制御・監視従事者（金属製品を除く）セ",
+    "job_count": 6599,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "機械組立設備制御・監視従事者",
+    "job_count": 2089,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製品製造・加工処理従事者（金属製品）セ",
+    "job_count": 37821,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製品製造・加工処理従事者（金属製品を除く）",
+    "job_count": 61529,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "機械組立従事者",
+    "job_count": 20856,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "機械整備・修理従事者",
+    "job_count": 37835,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製品検査従事者（金属製品）",
+    "job_count": 3849,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "製品検査従事者（金属製品を除く）",
+    "job_count": 5730,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "機械検査従事者",
+    "job_count": 3118,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "生産関連・生産類似作業従事者",
+    "job_count": 13030,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "輸送・機械運転従事者",
+    "job_count": 124272,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "鉄道運転従事者",
+    "job_count": 107,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "自動車運転従事者",
+    "job_count": 99935,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "船舶・航空機運転従事者",
+    "job_count": 115,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他の輸送従事者",
+    "job_count": 6399,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "定置・建設機械運転従事者",
+    "job_count": 17716,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "建設・採掘従事者",
+    "job_count": 109329,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "建設躯体工事従事者",
+    "job_count": 18426,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "建設従事者（建設躯体工事従事者を除く）",
+    "job_count": 30063,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "電気工事従事者",
+    "job_count": 19985,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "土木作業従事者",
+    "job_count": 40511,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "採掘従事者",
+    "job_count": 344,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "運搬・清掃・包装等従事者",
+    "job_count": 169372,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "運搬従事者",
+    "job_count": 56825,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "清掃従事者",
+    "job_count": 61809,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "包装従事者",
+    "job_count": 8131,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "その他の運搬・清掃・包装等従事者",
+    "job_count": 42607,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "分類不能の職業",
+    "job_count": 0,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  },
+  {
+    "occupation_name": "介護関係職種（注２）カ",
+    "job_count": 271168,
+    "year": 2026,
+    "month": 2,
+    "source_table": "長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+    "source_sheet": "第２１表ー２　有効求人（パート含む常用）",
+    "source_url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040428409&fileKind=0"
+  }
+]
