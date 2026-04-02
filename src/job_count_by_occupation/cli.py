@@ -18,6 +18,7 @@ from job_count_by_occupation.coverage import (
 )
 from job_count_by_occupation.estat import fetch_job_counts_from_year, fetch_latest_job_counts
 from job_count_by_occupation.prefecture import (
+    build_prefecture_major_occupation_scenarios,
     estimate_prefecture_occupation_jobs,
     estimate_prefecture_occupation_jobs_with_coverage,
     fetch_prefecture_total_monthly,
@@ -316,6 +317,62 @@ def build_parser() -> argparse.ArgumentParser:
         default=4,
         help="開始月。default: 4",
     )
+
+    prefecture_scenarios_parser = subparsers.add_parser("prefecture-scenarios", help="年月×都道府県×大分類×職種で、ハローワーク / base / low / high のシナリオCSVを作ります。")
+    prefecture_scenarios_parser.add_argument(
+        "--prefecture-total-csv",
+        type=Path,
+        default=Path("archive/outputs/prefecture_total_monthly_since_2022-04.csv"),
+        help="都道府県別総量CSV。default: archive/outputs/prefecture_total_monthly_since_2022-04.csv",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--national-occupation-csv",
+        type=Path,
+        default=Path("outputs/job_counts_2010-01_to_2026-02.csv"),
+        help="全国職業別CSV。default: outputs/job_counts_2010-01_to_2026-02.csv",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--major-template-csv",
+        type=Path,
+        default=Path("outputs/major_category_coverage_template_since_2022-04.csv"),
+        help="大分類カバー率テンプレCSV。default: outputs/major_category_coverage_template_since_2022-04.csv",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--occupation-master-csv",
+        type=Path,
+        default=Path("outputs/occupation_coverage_master_since_2022-04.csv"),
+        help="occupation 補正係数マスタ。default: outputs/occupation_coverage_master_since_2022-04.csv",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--output-csv",
+        type=Path,
+        default=Path("outputs/prefecture_major_occupation_scenarios_since_2022-04.csv"),
+        help="出力CSV。default: outputs/prefecture_major_occupation_scenarios_since_2022-04.csv",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--start-year",
+        type=int,
+        default=2022,
+        help="開始年。default: 2022",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--start-month",
+        type=int,
+        default=4,
+        help="開始月。default: 4",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--low-multiplier",
+        type=float,
+        default=0.70,
+        help="base に掛ける low シナリオ倍率。default: 0.70",
+    )
+    prefecture_scenarios_parser.add_argument(
+        "--high-multiplier",
+        type=float,
+        default=1.30,
+        help="base に掛ける high シナリオ倍率。default: 1.30",
+    )
     return parser
 
 
@@ -455,6 +512,20 @@ def main() -> int:
             national_occupation_estimate_csv=args.national_estimate_csv,
             output_csv=args.output_csv,
             start=(args.start_year, args.start_month),
+        )
+        print(f"出力: {output_path}")
+        return 0
+
+    if args.command == "prefecture-scenarios":
+        output_path = build_prefecture_major_occupation_scenarios(
+            prefecture_total_csv=args.prefecture_total_csv,
+            national_occupation_csv=args.national_occupation_csv,
+            major_template_csv=args.major_template_csv,
+            occupation_master_csv=args.occupation_master_csv,
+            output_csv=args.output_csv,
+            start=(args.start_year, args.start_month),
+            low_multiplier=args.low_multiplier,
+            high_multiplier=args.high_multiplier,
         )
         print(f"出力: {output_path}")
         return 0
