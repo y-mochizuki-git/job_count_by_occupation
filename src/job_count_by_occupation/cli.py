@@ -5,6 +5,7 @@ from pathlib import Path
 
 from job_count_by_occupation.chart_report import (
     generate_major_category_comparison_report,
+    generate_scenario_explorer_report,
     generate_top20_report,
 )
 from job_count_by_occupation.coverage import (
@@ -91,6 +92,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="開始年。default: 2022",
     )
     major_chart_parser.add_argument(
+        "--start-month",
+        type=int,
+        default=4,
+        help="開始月。default: 4",
+    )
+
+    scenario_chart_parser = subparsers.add_parser("scenario-chart", help="都道府県・大分類・職種を切り替えられる探索HTMLを作ります。")
+    scenario_chart_parser.add_argument(
+        "--input-csv",
+        type=Path,
+        default=Path("outputs/prefecture_major_occupation_scenarios_since_2022-04.csv"),
+        help="入力CSV。default: outputs/prefecture_major_occupation_scenarios_since_2022-04.csv",
+    )
+    scenario_chart_parser.add_argument(
+        "--output-html",
+        type=Path,
+        default=Path("outputs/scenario_explorer_since_2022-04.html"),
+        help="出力HTML。default: outputs/scenario_explorer_since_2022-04.html",
+    )
+    scenario_chart_parser.add_argument(
+        "--start-year",
+        type=int,
+        default=2022,
+        help="開始年。default: 2022",
+    )
+    scenario_chart_parser.add_argument(
         "--start-month",
         type=int,
         default=4,
@@ -415,6 +442,16 @@ def main() -> int:
 
     if args.command == "major-chart":
         output_path = generate_major_category_comparison_report(
+            csv_path=args.input_csv,
+            output_path=args.output_html,
+            start_year=args.start_year,
+            start_month=args.start_month,
+        )
+        print(f"出力: {output_path}")
+        return 0
+
+    if args.command == "scenario-chart":
+        output_path = generate_scenario_explorer_report(
             csv_path=args.input_csv,
             output_path=args.output_html,
             start_year=args.start_year,
