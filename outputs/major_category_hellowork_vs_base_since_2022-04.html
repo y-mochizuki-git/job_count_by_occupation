@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大分類別 有効求人数トレンド</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --paper: #fffdf8;
+      --ink: #1c1917;
+      --muted: #57534e;
+      --grid: #d6d3d1;
+      --frame: #e7e5e4;
+      --accent: #0f766e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, #fcd9b6 0, transparent 28%),
+        radial-gradient(circle at top right, #c7e7dd 0, transparent 30%),
+        linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+    }
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+    .lead {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .section {
+      margin-top: 28px;
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid var(--frame);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 18px 45px rgba(28, 25, 23, 0.08);
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+    }
+    .chart-block {
+      overflow-x: auto;
+    }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px 16px;
+      margin-top: 14px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+    .legend strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .footer {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    svg text {
+      font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>大分類別 有効求人数トレンド</h1>
+    <p class="lead">対象: 2022年4月以降 / 各大分類について ハローワーク実数 と base推計 を比較 / 総計・集計区分・分類不能は除外</p>
+    <section class="section">
+  <h2>専門・技術</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">769,547</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">1,271,659</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">1,773,771</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">2,275,884</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">2,777,996</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">3,280,109</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,431.99 103.17,433.66 128.35,429.82 153.52,429.58 178.70,427.78 203.87,426.56 229.04,423.78 254.22,421.80 279.39,422.56 304.57,419.96 329.74,414.78 354.91,416.99 380.09,426.54 405.26,429.59 430.43,427.20 455.61,427.57 480.78,425.71 505.96,426.59 531.13,422.45 556.30,422.90 581.48,423.55 606.65,420.33 631.83,414.76 657.00,418.70 682.17,426.99 707.35,425.53 732.52,423.35 757.70,420.81 782.87,423.44 808.04,425.05 833.22,420.59 858.39,419.50 883.57,419.35 908.74,417.97 933.91,416.09 959.09,418.14 984.26,424.03 1009.43,427.25 1034.61,428.32 1059.78,426.92 1084.96,429.68 1110.13,428.39 1135.30,426.08 1160.48,428.20 1185.65,426.32 1210.83,424.14 1236.00,423.82" /><circle cx="1236.00" cy="423.82" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,105.87 103.17,110.53 128.35,99.06 153.52,98.38 178.70,92.91 203.87,90.09 229.04,81.90 254.22,75.88 279.39,78.11 304.57,71.25 329.74,56.19 354.91,61.80 380.09,88.61 405.26,97.73 430.43,90.48 455.61,91.35 480.78,85.70 505.96,88.59 531.13,76.49 556.30,77.95 581.48,80.02 606.65,71.26 631.83,54.34 657.00,65.09 682.17,88.42 707.35,84.02 732.52,78.33 757.70,70.85 782.87,79.05 808.04,83.70 833.22,70.87 858.39,67.84 883.57,67.11 908.74,63.35 933.91,57.79 959.09,63.01 984.26,79.14 1009.43,88.52 1034.61,91.96 1059.78,88.57 1084.96,97.35 1110.13,94.13 1135.30,87.48 1160.48,93.57 1185.65,88.12 1210.83,82.41 1236.00,82.14" /><circle cx="1236.00" cy="82.14" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="427.82" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="86.14" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 998,823</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 2,948,363</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>サービス</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">799,028</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">1,148,483</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">1,497,938</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">1,847,393</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">2,196,848</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">2,546,303</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,411.96 103.17,405.69 128.35,402.66 153.52,402.71 178.70,399.51 203.87,397.41 229.04,390.15 254.22,388.46 279.39,397.33 304.57,401.16 329.74,400.94 354.91,395.94 380.09,404.93 405.26,401.91 430.43,401.20 455.61,403.12 480.78,401.33 505.96,400.13 531.13,394.34 556.30,396.47 581.48,406.17 606.65,414.41 631.83,410.88 657.00,407.65 682.17,409.58 707.35,407.47 732.52,410.68 757.70,406.61 782.87,410.50 808.04,405.95 833.22,399.69 858.39,403.40 883.57,411.27 908.74,419.85 933.91,421.34 959.09,418.69 984.26,419.01 1009.43,417.11 1034.61,418.95 1059.78,418.63 1084.96,423.02 1110.13,419.33 1135.30,415.79 1160.48,422.89 1185.65,428.30 1210.83,432.93 1236.00,433.66" /><circle cx="1236.00" cy="433.66" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,106.54 103.17,92.80 128.35,86.18 153.52,86.32 178.70,79.18 203.87,74.85 229.04,58.38 254.22,54.34 279.39,73.92 304.57,81.87 329.74,80.88 354.91,69.53 380.09,90.05 405.26,83.66 430.43,82.44 455.61,86.85 480.78,83.05 505.96,80.57 531.13,67.92 556.30,72.39 581.48,94.10 606.65,112.23 631.83,103.90 657.00,96.19 682.17,100.35 707.35,96.04 732.52,103.46 757.70,94.76 782.87,103.84 808.04,93.75 833.22,80.09 858.39,88.27 883.57,105.64 908.74,124.39 933.91,127.41 959.09,121.32 984.26,122.12 1009.43,118.18 1034.61,122.62 1059.78,122.28 1084.96,132.44 1110.13,124.00 1135.30,116.36 1160.48,131.77 1185.65,143.97 1210.83,153.82 1236.00,155.05" /><circle cx="1236.00" cy="155.05" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="437.66" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="159.05" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 919,529</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 2,025,905</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>事務</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">271,764</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">579,233</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">886,703</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">1,194,173</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">1,501,643</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">1,809,113</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,426.99 103.17,430.21 128.35,428.48 153.52,429.52 178.70,425.71 203.87,422.67 229.04,419.75 254.22,419.12 279.39,420.42 304.57,409.14 329.74,395.28 354.91,397.99 380.09,414.95 405.26,420.00 430.43,421.61 455.61,423.41 480.78,422.16 505.96,421.24 531.13,419.44 556.30,421.39 581.48,421.31 606.65,412.62 631.83,399.66 657.00,403.96 682.17,417.10 707.35,422.16 732.52,426.96 757.70,425.56 782.87,426.09 808.04,424.78 833.22,420.64 858.39,422.83 883.57,422.78 908.74,414.94 933.91,407.56 959.09,410.97 984.26,422.22 1009.43,427.34 1034.61,430.78 1059.78,430.42 1084.96,432.75 1110.13,430.46 1135.30,429.28 1160.48,433.66 1185.65,431.42 1210.83,422.79 1236.00,415.24" /><circle cx="1236.00" cy="415.24" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,160.56 103.17,171.32 128.35,165.62 153.52,169.09 178.70,156.36 203.87,146.25 229.04,136.60 254.22,134.50 279.39,138.65 304.57,100.80 329.74,54.34 354.91,63.62 380.09,120.61 405.26,137.49 430.43,142.96 455.61,148.96 480.78,144.77 505.96,141.78 531.13,135.88 556.30,142.33 581.48,142.00 606.65,112.83 631.83,69.35 657.00,83.85 682.17,127.95 707.35,144.87 732.52,160.92 757.70,156.24 782.87,158.03 808.04,153.71 833.22,140.00 858.39,147.28 883.57,146.98 908.74,120.55 933.91,95.72 959.09,107.25 984.26,144.99 1009.43,162.16 1034.61,173.62 1059.78,172.44 1084.96,180.24 1110.13,172.62 1135.30,168.76 1160.48,183.27 1185.65,175.65 1210.83,146.65 1236.00,121.38" /><circle cx="1236.00" cy="121.38" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="419.24" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="125.38" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 442,130</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 1,468,863</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>生産工程</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">339,326</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">465,418</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">591,510</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">717,602</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">843,694</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">969,786</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,369.00 103.17,376.96 128.35,373.21 153.52,375.27 178.70,371.85 203.87,364.88 229.04,362.19 254.22,364.77 279.39,378.78 304.57,384.19 329.74,382.65 354.91,380.08 380.09,391.36 405.26,399.33 430.43,397.71 455.61,400.25 480.78,397.48 505.96,392.12 531.13,389.56 556.30,397.61 581.48,408.20 606.65,414.02 631.83,408.34 657.00,406.37 682.17,414.38 707.35,421.71 732.52,427.90 757.70,424.94 782.87,427.37 808.04,420.01 833.22,410.78 858.39,414.24 883.57,422.43 908.74,425.40 933.91,422.05 959.09,419.38 984.26,421.83 1009.43,427.50 1034.61,429.71 1059.78,427.47 1084.96,432.64 1110.13,426.58 1135.30,422.99 1160.48,432.10 1185.65,433.66 1210.83,431.72 1236.00,426.72" /><circle cx="1236.00" cy="426.72" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,67.34 103.17,82.55 128.35,75.38 153.52,79.32 178.70,72.78 203.87,59.49 229.04,54.34 254.22,59.28 279.39,86.02 304.57,96.35 329.74,93.40 354.91,88.50 380.09,110.03 405.26,125.25 430.43,122.16 455.61,127.00 480.78,121.71 505.96,111.48 531.13,106.61 556.30,121.98 581.48,142.18 606.65,153.29 631.83,142.46 657.00,138.69 682.17,153.98 707.35,167.98 732.52,179.80 757.70,174.14 782.87,178.78 808.04,164.73 833.22,147.10 858.39,153.71 883.57,169.35 908.74,175.03 933.91,168.62 959.09,163.53 984.26,168.20 1009.43,179.03 1034.61,183.26 1059.78,178.97 1084.96,188.85 1110.13,177.27 1135.30,170.42 1160.48,187.80 1185.65,190.78 1210.83,187.09 1236.00,177.53" /><circle cx="1236.00" cy="177.53" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="430.72" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="181.53" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 392,750</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 749,795</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>販売</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">261,613</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">550,225</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">838,837</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">1,127,449</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">1,416,061</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">1,704,673</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,418.36 103.17,416.73 128.35,415.04 153.52,414.03 178.70,410.82 203.87,409.51 229.04,407.93 254.22,408.63 279.39,412.32 304.57,413.75 329.74,413.48 354.91,410.95 380.09,413.47 405.26,413.40 430.43,414.02 455.61,414.02 480.78,412.55 505.96,412.13 531.13,409.58 556.30,411.71 581.48,415.69 606.65,416.53 631.83,415.93 657.00,414.97 682.17,417.03 707.35,417.91 732.52,419.62 757.70,418.92 782.87,418.98 808.04,417.02 833.22,413.26 858.39,414.79 883.57,418.62 908.74,419.40 933.91,420.80 959.09,421.03 984.26,422.84 1009.43,424.25 1034.61,424.85 1059.78,424.25 1084.96,428.16 1110.13,427.28 1135.30,427.19 1160.48,430.20 1185.65,432.32 1210.83,433.66 1236.00,432.95" /><circle cx="1236.00" cy="432.95" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,92.20 103.17,86.22 128.35,80.19 153.52,76.49 178.70,64.72 203.87,60.07 229.04,54.34 254.22,56.93 279.39,70.45 304.57,75.64 329.74,74.88 354.91,65.66 380.09,74.75 405.26,74.49 430.43,76.80 455.61,76.99 480.78,71.67 505.96,70.12 531.13,60.89 556.30,68.72 581.48,83.30 606.65,86.40 631.83,84.39 657.00,80.85 682.17,88.07 707.35,91.17 732.52,97.38 757.70,94.97 782.87,94.97 808.04,87.80 833.22,74.28 858.39,79.96 883.57,94.00 908.74,96.63 933.91,101.77 959.09,102.60 984.26,109.21 1009.43,114.15 1034.61,116.40 1059.78,114.24 1084.96,128.36 1110.13,125.15 1135.30,124.88 1160.48,135.74 1185.65,143.42 1210.83,148.21 1236.00,145.69" /><circle cx="1236.00" cy="145.69" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="436.95" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="149.69" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 363,460</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 1,305,568</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>運搬・清掃・包装等</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">287,199</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">413,904</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">540,610</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">667,316</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">794,022</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">920,728</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,380.81 103.17,383.49 128.35,379.66 153.52,382.48 178.70,376.41 203.87,368.88 229.04,360.91 254.22,362.77 279.39,374.64 304.57,376.71 329.74,371.03 354.91,361.10 380.09,373.38 405.26,378.58 430.43,380.09 455.61,383.19 480.78,381.06 505.96,375.05 531.13,373.77 556.30,387.13 581.48,401.53 606.65,404.14 631.83,397.35 657.00,392.62 682.17,396.88 707.35,403.98 732.52,412.20 757.70,408.12 782.87,407.85 808.04,398.92 833.22,389.18 858.39,397.84 883.57,410.08 908.74,413.73 933.91,410.19 959.09,402.63 984.26,405.47 1009.43,410.55 1034.61,416.21 1059.78,414.36 1084.96,418.85 1110.13,412.38 1135.30,408.68 1160.48,421.97 1185.65,432.46 1210.83,433.66 1236.00,428.20" /><circle cx="1236.00" cy="428.20" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,94.26 103.17,99.71 128.35,92.08 153.52,97.79 178.70,85.56 203.87,70.41 229.04,54.34 254.22,58.09 279.39,81.93 304.57,86.09 329.74,74.61 354.91,54.69 380.09,79.43 405.26,89.91 430.43,92.98 455.61,99.20 480.78,94.96 505.96,82.82 531.13,80.14 556.30,106.92 581.48,135.85 606.65,141.08 631.83,127.38 657.00,117.94 682.17,126.52 707.35,140.87 732.52,157.40 757.70,149.19 782.87,148.61 808.04,130.59 833.22,110.95 858.39,128.35 883.57,152.97 908.74,160.32 933.91,153.15 959.09,137.98 984.26,143.68 1009.43,153.92 1034.61,165.33 1059.78,161.58 1084.96,170.60 1110.13,157.55 1135.30,150.06 1160.48,176.79 1185.65,197.89 1210.83,200.27 1236.00,189.26" /><circle cx="1236.00" cy="189.26" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="432.20" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="193.26" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 338,744</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 682,783</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>輸送・機械運転</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">224,364</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">284,830</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">345,297</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">405,763</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">466,230</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">526,697</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,415.87 103.17,417.48 128.35,412.66 153.52,410.97 178.70,409.46 203.87,406.05 229.04,400.95 254.22,402.36 279.39,414.47 304.57,413.54 329.74,404.79 354.91,398.92 380.09,405.40 405.26,409.69 430.43,407.15 455.61,409.59 480.78,406.36 505.96,406.75 531.13,399.56 556.30,406.87 581.48,415.86 606.65,415.72 631.83,408.98 657.00,405.54 682.17,412.27 707.35,416.48 732.52,420.97 757.70,419.51 782.87,422.69 808.04,419.62 833.22,407.13 858.39,409.10 883.57,420.76 908.74,423.59 933.91,419.68 959.09,412.91 984.26,413.80 1009.43,418.66 1034.61,420.73 1059.78,418.13 1084.96,424.56 1110.13,421.27 1135.30,417.70 1160.48,426.44 1185.65,433.66 1210.83,431.53 1236.00,428.81" /><circle cx="1236.00" cy="428.81" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,86.16 103.17,89.25 128.35,80.16 153.52,76.96 178.70,74.10 203.87,67.75 229.04,58.08 254.22,60.70 279.39,83.48 304.57,81.85 329.74,65.45 354.91,54.34 380.09,66.60 405.26,74.63 430.43,69.85 455.61,74.28 480.78,68.23 505.96,68.96 531.13,55.51 556.30,69.29 581.48,86.20 606.65,86.07 631.83,73.33 657.00,66.99 682.17,79.60 707.35,87.51 732.52,95.95 757.70,93.16 782.87,99.16 808.04,93.38 833.22,69.91 858.39,73.56 883.57,95.40 908.74,100.75 933.91,93.32 959.09,80.66 984.26,82.24 1009.43,91.48 1034.61,95.43 1059.78,90.55 1084.96,102.60 1110.13,96.40 1135.30,89.74 1160.48,106.22 1185.65,119.71 1210.83,115.85 1236.00,110.76" /><circle cx="1236.00" cy="110.76" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="432.81" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="114.76" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 248,544</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 467,083</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>建設・採掘</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">194,293</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">248,557</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">302,821</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">357,085</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">411,349</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">465,614</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,368.92 103.17,374.51 128.35,370.78 153.52,378.35 178.70,379.34 203.87,381.54 229.04,378.32 254.22,377.86 279.39,394.33 304.57,398.81 329.74,394.16 354.91,384.03 380.09,389.19 405.26,395.54 430.43,391.21 455.61,393.59 480.78,399.56 505.96,397.89 531.13,393.32 556.30,397.71 581.48,409.09 606.65,412.96 631.83,403.17 657.00,399.79 682.17,402.16 707.35,408.79 732.52,412.39 757.70,409.08 782.87,418.47 808.04,415.32 833.22,406.26 858.39,407.06 883.57,414.87 908.74,418.75 933.91,412.90 959.09,404.15 984.26,402.78 1009.43,403.74 1034.61,403.14 1059.78,406.55 1084.96,415.06 1110.13,414.79 1135.30,410.60 1160.48,419.05 1185.65,427.04 1210.83,433.66 1236.00,424.49" /><circle cx="1236.00" cy="424.49" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,54.34 103.17,64.17 128.35,57.54 153.52,70.88 178.70,72.67 203.87,76.43 229.04,70.73 254.22,70.02 279.39,99.12 304.57,107.11 329.74,98.94 354.91,81.08 380.09,90.16 405.26,101.40 430.43,93.78 455.61,97.92 480.78,108.44 505.96,105.41 531.13,97.41 556.30,105.22 581.48,125.37 606.65,132.14 631.83,114.90 657.00,109.11 682.17,113.21 707.35,124.98 732.52,131.36 757.70,125.47 782.87,141.93 808.04,136.33 833.22,120.37 858.39,121.77 883.57,135.66 908.74,142.53 933.91,132.26 959.09,116.83 984.26,114.36 1009.43,116.05 1034.61,115.02 1059.78,120.93 1084.96,135.94 1110.13,135.36 1135.30,127.92 1160.48,142.88 1185.65,157.05 1210.83,168.85 1236.00,152.72" /><circle cx="1236.00" cy="152.72" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="428.49" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="156.72" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 218,658</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 386,241</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>保安</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">63,894</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">93,906</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">123,918</text><line x1="78" y1="200.00" x2="1236" y2="200.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.00" text-anchor="end" font-size="12" fill="#57534e">153,931</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">183,943</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">213,956</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,433.17 103.17,433.66 128.35,427.41 153.52,425.07 178.70,419.77 203.87,413.48 229.04,410.09 254.22,410.58 279.39,419.70 304.57,422.28 329.74,420.24 354.91,410.57 380.09,412.10 405.26,413.76 430.43,411.07 455.61,409.79 480.78,409.52 505.96,408.76 531.13,400.95 556.30,399.73 581.48,406.06 606.65,413.85 631.83,412.20 657.00,410.83 682.17,413.45 707.35,412.37 732.52,408.81 757.70,406.17 782.87,405.77 808.04,407.46 833.22,395.82 858.39,390.76 883.57,391.47 908.74,390.05 933.91,388.47 959.09,382.70 984.26,385.95 1009.43,392.15 1034.61,390.11 1059.78,383.37 1084.96,389.30 1110.13,390.05 1135.30,387.28 1160.48,385.93 1185.65,389.68 1210.83,395.49 1236.00,390.74" /><circle cx="1236.00" cy="390.74" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,166.51 103.17,167.59 128.35,153.72 153.52,148.51 178.70,136.74 203.87,122.75 229.04,115.23 254.22,116.30 279.39,136.57 304.57,142.32 329.74,137.78 354.91,116.28 380.09,119.68 405.26,123.38 430.43,117.40 455.61,114.54 480.78,113.96 505.96,112.28 531.13,94.91 556.30,92.20 581.48,106.27 606.65,123.57 631.83,119.91 657.00,116.87 682.17,122.70 707.35,120.29 732.52,112.39 757.70,106.52 782.87,105.62 808.04,109.38 833.22,83.52 858.39,72.28 883.57,73.85 908.74,70.68 933.91,67.17 959.09,54.34 984.26,61.58 1009.43,75.36 1034.61,70.82 1059.78,55.85 1084.96,69.03 1110.13,70.69 1135.30,64.52 1160.48,61.53 1185.65,69.87 1210.83,82.79 1236.00,72.21" /><circle cx="1236.00" cy="72.21" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="394.74" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="76.21" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 88,881</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 197,513</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>農林漁業</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">13,271</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">17,213</text><line x1="78" y1="288.01" x2="1236" y2="288.01" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.01" text-anchor="end" font-size="12" fill="#57534e">21,155</text><line x1="78" y1="200.01" x2="1236" y2="200.01" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.01" text-anchor="end" font-size="12" fill="#57534e">25,097</text><line x1="78" y1="112.02" x2="1236" y2="112.02" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.02" text-anchor="end" font-size="12" fill="#57534e">29,039</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">32,982</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,301.40 103.17,317.05 128.35,330.53 153.52,342.05 178.70,340.38 203.87,335.89 229.04,339.98 254.22,352.70 279.39,381.56 304.57,374.17 329.74,343.77 354.91,312.94 380.09,345.36 405.26,363.24 430.43,371.72 455.61,382.05 480.78,379.04 505.96,379.69 531.13,379.53 556.30,383.17 581.48,407.23 606.65,398.75 631.83,363.01 657.00,342.50 682.17,360.09 707.35,375.02 732.52,397.03 757.70,400.36 782.87,409.98 808.04,397.34 833.22,392.68 858.39,408.55 883.57,429.69 908.74,409.31 933.91,382.10 959.09,362.12 984.26,370.67 1009.43,389.84 1034.61,400.63 1059.78,408.73 1084.96,415.76 1110.13,408.19 1135.30,403.01 1160.48,420.90 1185.65,433.66 1210.83,417.39 1236.00,386.94" /><circle cx="1236.00" cy="386.94" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,54.34 103.17,78.40 128.35,99.16 153.52,116.86 178.70,114.29 203.87,107.40 229.04,113.67 254.22,133.25 279.39,177.67 304.57,166.28 329.74,119.52 354.91,72.08 380.09,121.95 405.26,149.45 430.43,162.51 455.61,178.41 480.78,173.78 505.96,174.77 531.13,174.54 556.30,180.12 581.48,217.16 606.65,204.10 631.83,149.12 657.00,117.55 682.17,144.63 707.35,167.60 732.52,201.46 757.70,206.58 782.87,221.38 808.04,201.93 833.22,194.77 858.39,219.19 883.57,251.69 908.74,220.35 933.91,178.47 959.09,147.76 984.26,160.90 1009.43,190.39 1034.61,206.98 1059.78,219.46 1084.96,230.26 1110.13,218.63 1135.30,210.66 1160.48,238.16 1185.65,257.81 1210.83,232.78 1236.00,185.93" /><circle cx="1236.00" cy="185.93" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="390.94" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="189.93" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 16,723</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 25,728</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+<section class="section">
+  <h2>管理</h2>
+  <div class="chart-block"><svg viewBox="0 0 1260 520" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+  <rect x="0" y="0" width="1260" height="520" rx="18" fill="#fffdf8" />
+  <line x1="78" y1="464.00" x2="1236" y2="464.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="468.00" text-anchor="end" font-size="12" fill="#57534e">1,162</text><line x1="78" y1="376.00" x2="1236" y2="376.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="380.00" text-anchor="end" font-size="12" fill="#57534e">14,198</text><line x1="78" y1="288.00" x2="1236" y2="288.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="292.00" text-anchor="end" font-size="12" fill="#57534e">27,235</text><line x1="78" y1="200.01" x2="1236" y2="200.01" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="204.01" text-anchor="end" font-size="12" fill="#57534e">40,271</text><line x1="78" y1="112.00" x2="1236" y2="112.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="116.00" text-anchor="end" font-size="12" fill="#57534e">53,308</text><line x1="78" y1="24.00" x2="1236" y2="24.00" stroke="#d6d3d1" stroke-width="1" /><text x="68" y="28.00" text-anchor="end" font-size="12" fill="#57534e">66,345</text>
+  <line x1="78.00" y1="24" x2="78.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="78.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2022-04</text><line x1="354.91" y1="24" x2="354.91" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="354.91" y="500" text-anchor="middle" font-size="12" fill="#57534e">2023-03</text><line x1="657.00" y1="24" x2="657.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="657.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2024-03</text><line x1="959.09" y1="24" x2="959.09" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="959.09" y="500" text-anchor="middle" font-size="12" fill="#57534e">2025-03</text><line x1="1236.00" y1="24" x2="1236.00" y2="464" stroke="#eee7dc" stroke-width="1" /><text x="1236.00" y="500" text-anchor="middle" font-size="12" fill="#57534e">2026-02</text>
+  <line x1="78" y1="464" x2="1236" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <line x1="78" y1="24" x2="78" y2="464" stroke="#a8a29e" stroke-width="1.5" />
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.5" points="78.00,427.44 103.17,428.49 128.35,425.79 153.52,426.10 178.70,425.19 203.87,425.02 229.04,423.28 254.22,422.40 279.39,421.74 304.57,421.89 329.74,422.01 354.91,424.66 380.09,426.12 405.26,428.49 430.43,425.44 455.61,425.36 480.78,425.36 505.96,424.67 531.13,424.63 556.30,425.28 581.48,427.04 606.65,427.68 631.83,425.35 657.00,428.75 682.17,429.49 707.35,429.56 732.52,431.36 757.70,431.14 782.87,432.77 808.04,433.66 833.22,432.62 858.39,430.43 883.57,429.55 908.74,428.91 933.91,430.66 959.09,430.14 984.26,426.88 1009.43,428.65 1034.61,428.78 1059.78,432.44 1084.96,431.48 1110.13,431.38 1135.30,431.40 1160.48,433.41 1185.65,432.98 1210.83,432.94 1236.00,431.52" /><circle cx="1236.00" cy="431.52" r="3.5" fill="#0f766e" /><polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="78.00,101.82 103.17,110.59 128.35,88.09 153.52,90.62 178.70,83.03 203.87,81.63 229.04,67.11 254.22,59.80 279.39,54.34 304.57,55.52 329.74,56.59 354.91,78.64 380.09,90.79 405.26,110.59 430.43,85.11 455.61,84.50 480.78,84.50 505.96,78.70 531.13,78.42 556.30,83.82 581.48,98.44 606.65,103.79 631.83,84.43 657.00,112.73 682.17,118.92 707.35,119.48 732.52,134.45 757.70,132.64 782.87,146.20 808.04,153.62 833.22,145.02 858.39,126.74 883.57,119.37 908.74,114.03 933.91,128.65 959.09,124.32 984.26,97.15 1009.43,111.89 1034.61,113.02 1059.78,143.45 1084.96,135.46 1110.13,134.62 1135.30,134.78 1160.48,151.60 1185.65,147.95 1210.83,147.66 1236.00,135.80" /><circle cx="1236.00" cy="135.80" r="3.5" fill="#2563eb" />
+  <text x="1234.00" y="435.52" font-size="11" fill="#0f766e">1</text><text x="1234.00" y="139.80" font-size="11" fill="#2563eb">2</text>
+</svg></div>
+  <div class="legend">
+    <div class="legend-item">
+<span class="swatch" style="background:#0f766e"></span>
+<span><strong>ハローワーク</strong> 最新: 5,974</span>
+</div><div class="legend-item">
+<span class="swatch" style="background:#2563eb"></span>
+<span><strong>base推計</strong> 最新: 49,783</span>
+</div>
+  </div>
+  <div class="footer">縦軸は求人数、横軸は月次。各線は 2026年2月時点の上位職種です。</div>
+</section>
+  </main>
+</body>
+</html>

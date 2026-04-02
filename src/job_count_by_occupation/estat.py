@@ -24,10 +24,24 @@ E_STAT_SEARCH_URL = (
 )
 TARGET_TABLE_NUMBER = "21"
 TARGET_TABLE_TITLE = "職業別労働市場関係指標"
-TARGET_SHEET_NAME = "第２１表ー２　有効求人（パート含む常用）"
-TARGET_XLS_SHEET_PATTERN = "有効求人"
 USER_AGENT = "job-count-by-occupation/0.1"
 XML_NS = {"a": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+
+JOB_METRICS = {
+    "both": None,
+    "valid": {
+        "label": "有効求人数",
+        "xlsx_sheet": "第２１表ー２　有効求人（パート含む常用）",
+        "xls_pattern": "有効求人",
+    },
+    "new": {
+        "label": "新規求人数",
+        "xlsx_sheet": "第２１表ー１　新規求人（パート含む常用）",
+        "xls_pattern": "新規求人",
+    },
+}
+TARGET_SHEET_NAME = JOB_METRICS["valid"]["xlsx_sheet"]
+TARGET_XLS_SHEET_PATTERN = JOB_METRICS["valid"]["xls_pattern"]
 
 HISTORY_SOURCES = [
     {
@@ -66,6 +80,7 @@ class DatasetInfo:
 
 @dataclass
 class JobCountRecord:
+    job_metric: str
     occupation_name: str
     job_count: int
     year: int
@@ -218,10 +233,14 @@ class _EStatSearchParser(HTMLParser):
             self._current["title"] = f"{existing} {text}".strip()
 
 
-def fetch_latest_job_counts(output_dir: Path, output_format: str = "both") -> Tuple[DatasetInfo, List[JobCountRecord], List[Path]]:
+def fetch_latest_job_counts(
+    output_dir: Path,
+    output_format: str = "both",
+    job_metric: str = "both",
+) -> Tuple[DatasetInfo, List[JobCountRecord], List[Path]]:
     dataset = fetch_latest_dataset_info()
     workbook_bytes = _fetch_bytes(dataset.download_url)
-    records, year, month = parse_job_counts_from_workbook(workbook_bytes, dataset.download_url)
+    records, year, month = parse_job_counts_from_workbook(workbook_bytes, dataset.download_url, job_metric=job_metric)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     created_files = write_outputs(
@@ -238,6 +257,7 @@ def fetch_job_counts_from_year(
     start_year: int,
     output_dir: Path,
     output_format: str = "both",
+    job_metric: str = "both",
 ) -> Tuple[List[JobCountRecord], List[Path]]:
     all_records: List[JobCountRecord] = []
     for source in HISTORY_SOURCES:
@@ -248,6 +268,7 @@ def fetch_job_counts_from_year(
             requested_start_year=start_year,
             source_start=source["start"],
             source_end=source["end"],
+            job_metric=job_metric,
         )
         all_records.extend(source_records)
 
@@ -285,35 +306,46 @@ def fetch_latest_dataset_info() -> DatasetInfo:
     raise RuntimeError("対象の職業別統計表を e-Stat 上で見つけられませんでした。")
 
 
-def parse_job_counts_from_workbook(workbook_bytes: bytes, source_url: str) -> Tuple[List[JobCountRecord], int, int]:
+def parse_job_counts_from_workbook(
+    workbook_bytes: bytes,
+    source_url: str,
+    job_metric: str = "both",
+) -> Tuple[List[JobCountRecord], int, int]:
     reader = XlsxReader.from_bytes(workbook_bytes)
-    sheet = reader.read_sheet_by_name(TARGET_SHEET_NAME)
-    latest_col, year, month = _find_latest_month_column(sheet)
-
     records: List[JobCountRecord] = []
-    row_number = 6
-    while True:
-        occupation_name = sheet.get(f"A{row_number}", "").strip()
-        if not occupation_name:
-            break
-        raw_value = sheet.get(f"{latest_col}{row_number}", "").strip()
-        if raw_value.isdigit():
-            records.append(
-                JobCountRecord(
-                    occupation_name=_clean_occupation_name(occupation_name),
-                    job_count=int(raw_value),
-                    year=year,
-                    month=month,
-                    source_table="長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
-                    source_sheet=TARGET_SHEET_NAME,
-                    source_url=source_url,
-                )
-            )
-        row_number += 1
+    latest_year: Optional[int] = None
+    latest_month: Optional[int] = None
+    for metric_key in _metric_keys(job_metric):
+        metric = JOB_METRICS[metric_key]
+        sheet = reader.read_sheet_by_name(metric["xlsx_sheet"])
+        latest_col, year, month = _find_latest_month_column(sheet)
+        latest_year = year if latest_year is None else max(latest_year, year)
+        latest_month = month if latest_month is None else max(latest_month, month)
 
-    if not records:
+        row_number = 6
+        while True:
+            occupation_name = sheet.get(f"A{row_number}", "").strip()
+            if not occupation_name:
+                break
+            raw_value = sheet.get(f"{latest_col}{row_number}", "").strip()
+            if raw_value.isdigit():
+                records.append(
+                    JobCountRecord(
+                        job_metric=metric["label"],
+                        occupation_name=_clean_occupation_name(occupation_name),
+                        job_count=int(raw_value),
+                        year=year,
+                        month=month,
+                        source_table="長期時系列表 21 職業別労働市場関係指標（実数）（平成21年改定）（令和4年4月～）",
+                        source_sheet=metric["xlsx_sheet"],
+                        source_url=source_url,
+                    )
+                )
+            row_number += 1
+
+    if not records or latest_year is None or latest_month is None:
         raise RuntimeError("Excel から職種別求人数を抽出できませんでした。")
-    return records, year, month
+    return records, latest_year, latest_month
 
 
 def fetch_history_source_records(
@@ -323,12 +355,13 @@ def fetch_history_source_records(
     requested_start_year: int,
     source_start: Tuple[int, int],
     source_end: Optional[Tuple[int, int]],
+    job_metric: str = "both",
 ) -> List[JobCountRecord]:
     workbook_bytes = _fetch_bytes(source_url)
     if kind == "xlsx":
-        records = parse_all_months_from_xlsx(workbook_bytes, source_url, source_name)
+        records = parse_all_months_from_xlsx(workbook_bytes, source_url, source_name, job_metric=job_metric)
     elif kind == "xls":
-        records = parse_all_months_from_xls(workbook_bytes, source_url, source_name)
+        records = parse_all_months_from_xls(workbook_bytes, source_url, source_name, job_metric=job_metric)
     else:
         raise ValueError(f"Unsupported source kind: {kind}")
 
@@ -344,28 +377,53 @@ def fetch_history_source_records(
     return filtered
 
 
-def parse_all_months_from_xlsx(workbook_bytes: bytes, source_url: str, source_name: str) -> List[JobCountRecord]:
+def parse_all_months_from_xlsx(
+    workbook_bytes: bytes,
+    source_url: str,
+    source_name: str,
+    job_metric: str = "both",
+) -> List[JobCountRecord]:
     reader = XlsxReader.from_bytes(workbook_bytes)
-    sheet = reader.read_sheet_by_name(TARGET_SHEET_NAME)
-    month_columns = _find_all_xlsx_month_columns(sheet)
-    return _build_records_from_xlsx_month_columns(
-        sheet=sheet,
-        month_columns=month_columns,
-        source_url=source_url,
-        source_name=source_name,
-    )
+    records: List[JobCountRecord] = []
+    for metric_key in _metric_keys(job_metric):
+        metric = JOB_METRICS[metric_key]
+        sheet = reader.read_sheet_by_name(metric["xlsx_sheet"])
+        month_columns = _find_all_xlsx_month_columns(sheet)
+        records.extend(
+            _build_records_from_xlsx_month_columns(
+                sheet=sheet,
+                month_columns=month_columns,
+                source_url=source_url,
+                source_name=source_name,
+                job_metric_label=metric["label"],
+                source_sheet=metric["xlsx_sheet"],
+            )
+        )
+    return records
 
 
-def parse_all_months_from_xls(workbook_bytes: bytes, source_url: str, source_name: str) -> List[JobCountRecord]:
+def parse_all_months_from_xls(
+    workbook_bytes: bytes,
+    source_url: str,
+    source_name: str,
+    job_metric: str = "both",
+) -> List[JobCountRecord]:
     book = xlrd.open_workbook(file_contents=workbook_bytes)
-    sheet = _find_xls_target_sheet(book)
-    month_columns = _find_all_xls_month_columns(sheet)
-    return _build_records_from_xls_month_columns(
-        sheet=sheet,
-        month_columns=month_columns,
-        source_url=source_url,
-        source_name=source_name,
-    )
+    records: List[JobCountRecord] = []
+    for metric_key in _metric_keys(job_metric):
+        metric = JOB_METRICS[metric_key]
+        sheet = _find_xls_target_sheet(book, metric["xls_pattern"])
+        month_columns = _find_all_xls_month_columns(sheet)
+        records.extend(
+            _build_records_from_xls_month_columns(
+                sheet=sheet,
+                month_columns=month_columns,
+                source_url=source_url,
+                source_name=source_name,
+                job_metric_label=metric["label"],
+            )
+        )
+    return records
 
 
 def write_outputs(
@@ -389,7 +447,7 @@ def write_outputs(
         with csv_path.open("w", encoding="utf-8", newline="") as fh:
             writer = csv.DictWriter(
                 fh,
-                fieldnames=["year", "month", "major_category", "occupation_name", "job_count"],
+                fieldnames=["year", "month", "job_metric", "major_category", "occupation_name", "job_count"],
             )
             writer.writeheader()
             for record in records:
@@ -397,6 +455,7 @@ def write_outputs(
                     {
                         "year": record.year,
                         "month": record.month,
+                        "job_metric": record.job_metric,
                         "major_category": get_major_category(record.occupation_name),
                         "occupation_name": record.occupation_name,
                         "job_count": record.job_count,
@@ -505,12 +564,12 @@ def _find_all_xlsx_month_columns(sheet: Dict[str, str]) -> List[Tuple[int, int, 
     return sorted(candidates)
 
 
-def _find_xls_target_sheet(book: xlrd.book.Book) -> xlrd.sheet.Sheet:
+def _find_xls_target_sheet(book: xlrd.book.Book, metric_pattern: str) -> xlrd.sheet.Sheet:
     for idx in range(book.nsheets):
         sheet = book.sheet_by_index(idx)
-        if TARGET_XLS_SHEET_PATTERN in sheet.name and "含パート" in sheet.name:
+        if metric_pattern in sheet.name and "含パート" in sheet.name:
             return sheet
-    raise RuntimeError("旧Excel内に対象の有効求人シートが見つかりませんでした。")
+    raise RuntimeError(f"旧Excel内に対象シートが見つかりませんでした: {metric_pattern}")
 
 
 def _find_all_xls_month_columns(sheet: xlrd.sheet.Sheet) -> List[Tuple[int, int, int]]:
@@ -546,6 +605,8 @@ def _build_records_from_xlsx_month_columns(
     month_columns: List[Tuple[int, int, str]],
     source_url: str,
     source_name: str,
+    job_metric_label: str,
+    source_sheet: str,
 ) -> List[JobCountRecord]:
     records: List[JobCountRecord] = []
     row_number = 6
@@ -559,12 +620,13 @@ def _build_records_from_xlsx_month_columns(
             if raw_value.isdigit():
                 records.append(
                     JobCountRecord(
+                        job_metric=job_metric_label,
                         occupation_name=cleaned_name,
                         job_count=int(raw_value),
                         year=year,
                         month=month,
                         source_table=source_name,
-                        source_sheet=TARGET_SHEET_NAME,
+                        source_sheet=source_sheet,
                         source_url=source_url,
                     )
                 )
@@ -577,6 +639,7 @@ def _build_records_from_xls_month_columns(
     month_columns: List[Tuple[int, int, int]],
     source_url: str,
     source_name: str,
+    job_metric_label: str,
 ) -> List[JobCountRecord]:
     records: List[JobCountRecord] = []
     for row_idx in range(3, sheet.nrows):
@@ -594,6 +657,7 @@ def _build_records_from_xls_month_columns(
                 continue
             records.append(
                 JobCountRecord(
+                    job_metric=job_metric_label,
                     occupation_name=cleaned_name,
                     job_count=job_count,
                     year=year,
@@ -629,6 +693,25 @@ def _extract_detail_value(text: str, pattern: str) -> str:
 
 def get_major_category(occupation_name: str) -> str:
     return MAJOR_CATEGORY_MAP.get(occupation_name, "")
+
+
+def normalize_job_metric(job_metric: str) -> str:
+    metric = (job_metric or "both").strip().lower()
+    if metric not in JOB_METRICS:
+        raise ValueError(f"Unsupported job metric: {job_metric}")
+    return metric
+
+
+def is_target_job_metric(row: Dict[str, str], job_metric_label: str = "有効求人数") -> bool:
+    row_metric = row.get("job_metric", "").strip()
+    return row_metric in {"", job_metric_label}
+
+
+def _metric_keys(job_metric: str) -> List[str]:
+    metric = normalize_job_metric(job_metric)
+    if metric == "both":
+        return ["valid", "new"]
+    return [metric]
 
 
 def _fetch_text(url: str) -> str:
