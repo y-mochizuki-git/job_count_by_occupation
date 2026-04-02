@@ -230,9 +230,6 @@
         const hellowork = row[4];
         const base = row[5];
         const offer = row[6];
-        const divisor = state.rateType === "vs_hellowork" ? hellowork : base;
-        if (!divisor) continue;
-        const rate = offer / divisor;
 
         let key = "";
         let label = "";
@@ -262,11 +259,24 @@
         if (!grouped.has(key)) {
           grouped.set(key, { name: label, values: new Map() });
         }
-        grouped.get(key).values.set(date, rate);
+        const entry = grouped.get(key);
+        if (!entry.values.has(date)) {
+          entry.values.set(date, { hellowork: 0, base: 0, offer: 0 });
+        }
+        const bucket = entry.values.get(date);
+        bucket.hellowork += hellowork;
+        bucket.base += base;
+        bucket.offer += offer;
       }
 
       const series = [...grouped.values()].map((entry) => {
-        const points = DATA.dates.map((date) => entry.values.has(date) ? entry.values.get(date) : null);
+        const points = DATA.dates.map((date) => {
+          if (!entry.values.has(date)) return null;
+          const bucket = entry.values.get(date);
+          const divisor = state.rateType === "vs_hellowork" ? bucket.hellowork : bucket.base;
+          if (!divisor) return null;
+          return bucket.offer / divisor;
+        });
         const latest = [...points].reverse().find((value) => value !== null) ?? 0;
         return { name: entry.name, points, latest };
       });
