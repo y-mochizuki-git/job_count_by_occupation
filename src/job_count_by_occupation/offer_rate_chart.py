@@ -97,7 +97,8 @@ def _load_offer_rate_dataset(input_csv: Path) -> Dict[str, object]:
             occupation_name = row["occupation_name"].strip()
             hellowork = int(row[hellowork_column])
             base = int(row["prefecture_base_job_count"])
-            offer = int(row["job_offer_count"])
+            offer_text = row["job_offer_count"].strip()
+            offer = int(offer_text) if offer_text else 0
 
             rows.append(
                 [
