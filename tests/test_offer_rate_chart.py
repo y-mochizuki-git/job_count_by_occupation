@@ -44,6 +44,25 @@ class OfferRateChartTests(unittest.TestCase):
             self.assertIn("北海道", text)
             self.assertIn("2026-02", text)
 
+    def test_generate_offer_rate_explorer_html_treats_blank_offer_as_zero(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_csv = Path(tmp_dir) / "input.csv"
+            output_html = Path(tmp_dir) / "out.html"
+            input_csv.write_text(
+                "\n".join(
+                    [
+                        "date,prefecture,major_category,occupation_name,prefecture_hellowork_job_count,prefecture_base_job_count,job_offer_count",
+                        "2026-01,北海道,サービス,介護サービス職業従事者,100,200,",
+                        "2026-02,北海道,サービス,介護サービス職業従事者,120,240,12",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            generate_offer_rate_explorer_html(input_csv, output_html)
+            text = output_html.read_text(encoding="utf-8")
+            self.assertIn('"rows":[[0,0,0,0,100,200,0],[1,0,0,0,120,240,12]]', text)
+
 
 if __name__ == "__main__":
     unittest.main()
