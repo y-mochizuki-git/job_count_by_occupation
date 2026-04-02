@@ -7,6 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from job_count_by_occupation.prefecture import _clean_prefecture_name, estimate_prefecture_occupation_jobs
+from job_count_by_occupation.prefecture import build_prefecture_major_occupation_scenarios
 from job_count_by_occupation.prefecture import estimate_prefecture_occupation_jobs_with_coverage
 
 
@@ -80,6 +81,79 @@ class PrefectureTests(unittest.TestCase):
                 rows = list(csv.DictReader(fh))
             self.assertEqual(rows[0]["estimated_prefecture_occupation_job_count"], "56")
             self.assertEqual(rows[1]["estimated_prefecture_occupation_job_count"], "224")
+
+    def test_build_prefecture_major_occupation_scenarios(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            prefecture_total = Path(tmp_dir) / "pref.csv"
+            national = Path(tmp_dir) / "national.csv"
+            major_template = Path(tmp_dir) / "major.csv"
+            occupation_master = Path(tmp_dir) / "master.csv"
+            output = Path(tmp_dir) / "out.csv"
+
+            prefecture_total.write_text(
+                "\n".join(
+                    [
+                        "year,month,prefecture,prefecture_total_job_count,national_total_job_count,source_sheet,source_url",
+                        "2022,4,北海道,280,1000,sheet,url",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            national.write_text(
+                "\n".join(
+                    [
+                        "year,month,job_metric,major_category,occupation_name,job_count",
+                        "2022,4,有効求人数,総計,職業計,1000",
+                        "2022,4,有効求人数,専門・技術,情報処理・通信技術者,100",
+                        "2022,4,有効求人数,サービス,サービス職業従事者,300",
+                        "2022,4,新規求人数,総計,職業計,500",
+                        "2022,4,新規求人数,専門・技術,情報処理・通信技術者,50",
+                        "2022,4,新規求人数,サービス,サービス職業従事者,150",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            major_template.write_text(
+                "\n".join(
+                    [
+                        "year,month,major_category,estat_job_count,coverage_rate,estimated_national_job_count,coverage_source,notes",
+                        "2022,4,専門・技術,100,0.5,200,test,",
+                        "2022,4,サービス,300,0.5,600,test,",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            occupation_master.write_text(
+                "\n".join(
+                    [
+                        "occupation_name,major_category,description,examples_or_scope,jobmedley_related,occupation_relative_factor,factor_source,confidence,notes",
+                        "情報処理・通信技術者,専門・技術,IT職,開発など,false,1.00,test,low,",
+                        "サービス職業従事者,サービス,サービス職,接客など,false,1.00,test,low,",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            build_prefecture_major_occupation_scenarios(
+                prefecture_total_csv=prefecture_total,
+                national_occupation_csv=national,
+                major_template_csv=major_template,
+                occupation_master_csv=occupation_master,
+                output_csv=output,
+                start=(2022, 4),
+                low_multiplier=0.5,
+                high_multiplier=1.5,
+            )
+            with output.open(encoding="utf-8") as fh:
+                rows = list(csv.DictReader(fh))
+
+            valid_rows = [row for row in rows if row["job_metric"] == "有効求人数"]
+            new_rows = [row for row in rows if row["job_metric"] == "新規求人数"]
+            self.assertEqual(valid_rows[0]["prefecture_hellowork_job_count"], "28")
+            self.assertEqual(valid_rows[0]["prefecture_base_job_count"], "56")
+            self.assertEqual(valid_rows[0]["prefecture_low_job_count"], "28")
+            self.assertEqual(valid_rows[0]["prefecture_high_job_count"], "84")
+            self.assertEqual(new_rows[0]["national_hellowork_total_job_count"], "500")
 
 
 if __name__ == "__main__":
