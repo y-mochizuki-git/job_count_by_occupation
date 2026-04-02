@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Sequence, Tuple
 
+from job_count_by_occupation.estat import is_target_job_metric
+
 
 @dataclass
 class SeriesPoint:
@@ -58,6 +60,23 @@ def generate_top20_report(
     return output_path
 
 
+def generate_major_category_comparison_report(
+    csv_path: Path,
+    output_path: Path,
+    start_year: int = 2022,
+    start_month: int = 4,
+) -> Path:
+    sections = _load_major_category_sections(csv_path, start_year, start_month)
+    html_text = _build_html(
+        title="大分類別 有効求人数トレンド",
+        subtitle=f"対象: {start_year}年{start_month}月以降 / 各大分類について ハローワーク実数 と base推計 を比較 / 総計・集計区分・分類不能は除外",
+        sections=sections,
+    )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(html_text, encoding="utf-8")
+    return output_path
+
+
 def _load_top_series(csv_path: Path, start_year: int, start_month: int, top_n: int) -> List[OccupationSeries]:
     records: Dict[str, List[Tuple[str, int]]] = {}
     latest_label = ""
@@ -66,6 +85,8 @@ def _load_top_series(csv_path: Path, start_year: int, start_month: int, top_n: i
     with csv_path.open(encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         for row in reader:
+            if not is_target_job_metric(row):
+                continue
             year = int(row["year"])
             month = int(row["month"])
             if (year, month) < (start_year, start_month):
@@ -98,6 +119,57 @@ def _load_top_series(csv_path: Path, start_year: int, start_month: int, top_n: i
             )
         )
     return series_list
+
+
+def _load_major_category_sections(
+    csv_path: Path,
+    start_year: int,
+    start_month: int,
+) -> List[Tuple[str, List[OccupationSeries]]]:
+    bucket: Dict[str, Dict[Tuple[int, int], Dict[str, int]]] = {}
+    latest_values: Dict[str, int] = {}
+
+    with csv_path.open(encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        for row in reader:
+            year = int(row["year"])
+            month = int(row["month"])
+            if (year, month) < (start_year, start_month):
+                continue
+
+            major_category = row.get("major_category", "").strip()
+            if major_category in {"", "総計", "集計区分", "分類不能"}:
+                continue
+
+            estat_text = row.get("estat_job_count", "").strip()
+            estimated_text = row.get("estimated_national_job_count", "").strip()
+            if not estat_text or not estimated_text:
+                continue
+
+            category_bucket = bucket.setdefault(major_category, {})
+            month_bucket = category_bucket.setdefault((year, month), {"ハローワーク": 0, "base推計": 0})
+            month_bucket["ハローワーク"] += int(estat_text)
+            month_bucket["base推計"] += int(estimated_text)
+            latest_values[major_category] = month_bucket["ハローワーク"]
+
+    sections: List[Tuple[str, List[OccupationSeries]]] = []
+    for major_category, _ in sorted(latest_values.items(), key=lambda item: item[1], reverse=True):
+        series_group = []
+        for series_name in ["ハローワーク", "base推計"]:
+            points_raw = [
+                (f"{year}-{month:02d}", values[series_name])
+                for (year, month), values in sorted(bucket[major_category].items())
+            ]
+            points = [SeriesPoint(label=label, value=value) for label, value in points_raw]
+            series_group.append(
+                OccupationSeries(
+                    occupation_name=series_name,
+                    latest_value=points[-1].value,
+                    points=points,
+                )
+            )
+        sections.append((major_category, series_group))
+    return sections
 
 
 def _build_html(title: str, subtitle: str, sections: Sequence[Tuple[str, Sequence[OccupationSeries]]]) -> str:

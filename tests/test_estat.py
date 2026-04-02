@@ -40,18 +40,39 @@ class EstatTests(unittest.TestCase):
 
     def test_parse_job_counts_from_workbook(self) -> None:
         workbook_bytes = _build_test_workbook()
-        records, year, month = parse_job_counts_from_workbook(workbook_bytes, "https://example.com/source.xlsx")
+        records, year, month = parse_job_counts_from_workbook(
+            workbook_bytes,
+            "https://example.com/source.xlsx",
+            job_metric="valid",
+        )
 
         self.assertEqual((2026, 2), (year, month))
         self.assertEqual(3, len(records))
         self.assertEqual("職業計", records[0].occupation_name)
         self.assertEqual(101, records[0].job_count)
+        self.assertEqual("有効求人数", records[0].job_metric)
         self.assertEqual("管理的職業従事者", records[1].occupation_name)
         self.assertEqual(11, records[1].job_count)
 
+    def test_parse_job_counts_from_workbook_both_metrics(self) -> None:
+        workbook_bytes = _build_test_workbook()
+        records, year, month = parse_job_counts_from_workbook(
+            workbook_bytes,
+            "https://example.com/source.xlsx",
+            job_metric="both",
+        )
+
+        self.assertEqual((2026, 2), (year, month))
+        self.assertEqual(6, len(records))
+        self.assertEqual(["新規求人数", "有効求人数"], sorted({record.job_metric for record in records}))
+
     def test_write_outputs(self) -> None:
         workbook_bytes = _build_test_workbook()
-        records, year, month = parse_job_counts_from_workbook(workbook_bytes, "https://example.com/source.xlsx")
+        records, year, month = parse_job_counts_from_workbook(
+            workbook_bytes,
+            "https://example.com/source.xlsx",
+            job_metric="both",
+        )
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             created = write_outputs(Path(tmp_dir), "both", records, year, month)
@@ -59,11 +80,11 @@ class EstatTests(unittest.TestCase):
             self.assertTrue(any(path.suffix == ".csv" for path in created))
             json_path = next(path for path in created if path.suffix == ".json")
             payload = json.loads(json_path.read_text(encoding="utf-8"))
-            self.assertEqual(3, len(payload))
+            self.assertEqual(6, len(payload))
             self.assertEqual(2026, payload[0]["year"])
             csv_path = next(path for path in created if path.suffix == ".csv")
             csv_text = csv_path.read_text(encoding="utf-8")
-            self.assertTrue(csv_text.startswith("year,month,major_category,occupation_name,job_count"))
+            self.assertTrue(csv_text.startswith("year,month,job_metric,major_category,occupation_name,job_count"))
 
     def test_xlsx_reader_resolves_sheet_by_name(self) -> None:
         workbook_bytes = _build_test_workbook()
@@ -85,6 +106,7 @@ def _build_test_workbook() -> bytes:
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
   <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+  <Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
   <Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>
 </Types>
 """
@@ -97,14 +119,16 @@ def _build_test_workbook() -> bytes:
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
   <sheets>
-    <sheet name="{TARGET_SHEET_NAME}" sheetId="1" r:id="rId1"/>
+    <sheet name="第２１表ー１　新規求人（パート含む常用）" sheetId="1" r:id="rId1"/>
+    <sheet name="{TARGET_SHEET_NAME}" sheetId="2" r:id="rId2"/>
   </sheets>
 </workbook>
 """
     workbook_rels = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
-  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/>
+  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>
 </Relationships>
 """
     shared_strings = [
@@ -124,7 +148,35 @@ def _build_test_workbook() -> bytes:
     for value in shared_strings:
         shared_xml.append(f"<si><t>{value}</t></si>")
     shared_xml.append("</sst>")
-    worksheet = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    new_worksheet = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <sheetData>
+    <row r="2">
+      <c r="B2" t="s"><v>0</v></c>
+      <c r="C2" t="s"><v>1</v></c>
+      <c r="D2" t="s"><v>1</v></c>
+    </row>
+    <row r="4">
+      <c r="B4" t="s"><v>2</v></c>
+      <c r="C4" t="s"><v>3</v></c>
+      <c r="D4" t="s"><v>4</v></c>
+    </row>
+    <row r="6">
+      <c r="A6" t="s"><v>5</v></c>
+      <c r="D6"><v>201</v></c>
+    </row>
+    <row r="7">
+      <c r="A7" t="s"><v>6</v></c>
+      <c r="D7"><v>21</v></c>
+    </row>
+    <row r="8">
+      <c r="A8" t="s"><v>7</v></c>
+      <c r="D8"><v>32</v></c>
+    </row>
+  </sheetData>
+</worksheet>
+"""
+    valid_worksheet = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <sheetData>
     <row r="2">
@@ -160,7 +212,8 @@ def _build_test_workbook() -> bytes:
         zf.writestr("xl/workbook.xml", workbook)
         zf.writestr("xl/_rels/workbook.xml.rels", workbook_rels)
         zf.writestr("xl/sharedStrings.xml", "".join(shared_xml))
-        zf.writestr("xl/worksheets/sheet1.xml", worksheet)
+        zf.writestr("xl/worksheets/sheet1.xml", new_worksheet)
+        zf.writestr("xl/worksheets/sheet2.xml", valid_worksheet)
     return output.getvalue()
 
 
