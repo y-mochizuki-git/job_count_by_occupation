@@ -46,6 +46,12 @@ job-count-by-occupation occupation-coverage-estimate
 job-count-by-occupation major-chart
 ```
 
+都道府県・大分類・職種を切り替えながら、`ハローワーク / base / low / high` を見られる探索HTMLを作成:
+
+```bash
+job-count-by-occupation scenario-chart
+```
+
 年月 × 都道府県 × 大分類 × 職種で、`ハローワーク / base / low / high` のシナリオCSVを作成:
 
 ```bash
@@ -76,6 +82,7 @@ job-count-by-occupation national-scenarios --low-multiplier 0.8 --high-multiplie
 - `outputs/major_category_hellowork_vs_base_since_2022-04.csv`
 - `outputs/major_category_hellowork_vs_base_since_2022-04.html`
 - `outputs/prefecture_major_occupation_scenarios_since_2022-04.csv`
+- `outputs/scenario_explorer_since_2022-04.html`
 - `outputs/occupation_coverage_master_since_2022-04.csv`
 - `outputs/occupation_national_estimate_since_2022-04.csv`
 
