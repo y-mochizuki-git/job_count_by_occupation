@@ -52,6 +52,18 @@ job-count-by-occupation major-chart
 job-count-by-occupation scenario-chart
 ```
 
+`date,prefecture,major_category,occupation_name,prefecture_hellowork_job_count,prefecture_base_job_count,job_offer_count` のCSVから、応募率の探索HTMLを作成:
+
+```bash
+job-count-by-occupation offer-rate-chart --input-csv outputs/sample_offer_rate_input.csv --output-html outputs/offer_rate_explorer.html
+```
+
+サンプルCSVを作成:
+
+```bash
+job-count-by-occupation offer-rate-sample
+```
+
 年月 × 都道府県 × 大分類 × 職種で、`ハローワーク / base / low / high` のシナリオCSVを作成:
 
 ```bash
@@ -83,6 +95,8 @@ job-count-by-occupation national-scenarios --low-multiplier 0.8 --high-multiplie
 - `outputs/major_category_hellowork_vs_base_since_2022-04.html`
 - `outputs/prefecture_major_occupation_scenarios_since_2022-04.csv`
 - `outputs/scenario_explorer_since_2022-04.html`
+- `outputs/sample_offer_rate_input.csv`
+- `outputs/offer_rate_explorer.html`
 - `outputs/occupation_coverage_master_since_2022-04.csv`
 - `outputs/occupation_national_estimate_since_2022-04.csv`
 

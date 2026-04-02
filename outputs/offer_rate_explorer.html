@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>求人応募率シナリオ探索</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --paper: rgba(255, 253, 248, 0.96);
+      --ink: #1c1917;
+      --muted: #57534e;
+      --frame: #e7e5e4;
+      --grid: #d6d3d1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, #fcd9b6 0, transparent 28%),
+        radial-gradient(circle at top right, #c7e7dd 0, transparent 30%),
+        linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+    }
+    .wrap {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 { margin: 0; font-size: 34px; line-height: 1.15; }
+    .lead {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 980px;
+    }
+    .panel {
+      margin-top: 24px;
+      background: var(--paper);
+      border: 1px solid var(--frame);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 18px 45px rgba(28, 25, 23, 0.08);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px 16px;
+      align-items: end;
+    }
+    label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #d6d3d1;
+      background: #fffdf8;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .summary strong { color: var(--ink); }
+    .chart-wrap { margin-top: 18px; overflow-x: auto; }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px 16px;
+      margin-top: 14px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+    .hint {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .empty {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px dashed #d6d3d1;
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(255, 253, 248, 0.75);
+    }
+    svg text { font-family: "Hiragino Sans", "Yu Gothic", sans-serif; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>応募率の時系列探索</h1>
+    <p class="lead">入力CSVから `job_offer_count / prefecture_hellowork_job_count` と `job_offer_count / prefecture_base_job_count` を計算し、都道府県別・大分類別・職種別・都道府県×職種別の折れ線グラフを切り替えて見られる HTML です。</p>
+    <section class="panel">
+      <div class="controls">
+        <label>表示モード
+          <select id="viewMode">
+            <option value="prefecture">prefecture別</option>
+            <option value="major">major_category別</option>
+            <option value="occupation">occupation_name別</option>
+            <option value="prefecture_occupation">prefecture & occupation_name別</option>
+          </select>
+        </label>
+        <label>rate
+          <select id="rateType"></select>
+        </label>
+        <label>prefecture
+          <select id="prefecture"></select>
+        </label>
+        <label>major_category
+          <select id="majorCategory"></select>
+        </label>
+        <label>occupation_name
+          <select id="occupation"></select>
+        </label>
+        <label>表示本数
+          <select id="topN">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+        </label>
+      </div>
+      <div class="summary" id="summary"></div>
+      <div class="chart-wrap" id="chartWrap"></div>
+      <div class="legend" id="legend"></div>
+      <div class="hint">
+        比較しない軸はフィルタとして使います。例えば `occupation_name別` で `prefecture=北海道`、`major_category=サービス` を選ぶと、北海道のサービス職種だけを比較します。
+      </div>
+    </section>
+  </main>
+  <script id="rate-data" type="application/json">{"dates":["2025-11","2025-12","2026-01","2026-02"],"prefectures":["北海道","東京都"],"majorCategories":["サービス","専門・技術"],"occupations":["介護サービス職業従事者","保健師，助産師，看護師"],"rateTypes":{"vs_hellowork":"job_offer_count / prefecture_hellowork_job_count","vs_base":"job_offer_count / prefecture_base_job_count"},"rows":[[0,0,0,0,1200,2200,180],[0,0,1,1,980,1840,152],[0,1,0,0,5200,9100,610],[0,1,1,1,4100,7600,520],[1,0,0,0,1180,2180,176],[1,0,1,1,995,1865,158],[1,1,0,0,5180,9050,598],[1,1,1,1,4150,7680,528],[2,0,0,0,1250,2300,190],[2,0,1,1,1020,1920,163],[2,1,0,0,5350,9340,625],[2,1,1,1,4230,7800,539],[3,0,0,0,1280,2360,196],[3,0,1,1,1045,1970,171],[3,1,0,0,5480,9580,642],[3,1,1,1,4310,7940,548]]}</script>
+  <script>
+    const DATA = JSON.parse(document.getElementById("rate-data").textContent);
+    const ALL = "__all__";
+    const COLORS = ["#0f766e","#2563eb","#dc2626","#7c3aed","#d97706","#059669","#db2777","#4f46e5","#0891b2","#65a30d"];
+    const viewModeEl = document.getElementById("viewMode");
+    const rateTypeEl = document.getElementById("rateType");
+    const prefectureEl = document.getElementById("prefecture");
+    const majorEl = document.getElementById("majorCategory");
+    const occupationEl = document.getElementById("occupation");
+    const topNEl = document.getElementById("topN");
+    const summaryEl = document.getElementById("summary");
+    const chartWrapEl = document.getElementById("chartWrap");
+    const legendEl = document.getElementById("legend");
+
+    function setOptions(select, options, includeAll = true, allLabel = "すべて") {
+      const current = select.value;
+      select.innerHTML = "";
+      if (includeAll) {
+        const option = document.createElement("option");
+        option.value = ALL;
+        option.textContent = allLabel;
+        select.appendChild(option);
+      }
+      for (const [value, label] of options) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        select.appendChild(option);
+      }
+      if ([...select.options].some((option) => option.value === current)) {
+        select.value = current;
+      }
+    }
+
+    function init() {
+      setOptions(rateTypeEl, Object.entries(DATA.rateTypes), false);
+      setOptions(prefectureEl, DATA.prefectures.map((value) => [value, value]), true, "全prefecture");
+      setOptions(majorEl, DATA.majorCategories.map((value) => [value, value]), true, "全major_category");
+      setOptions(occupationEl, DATA.occupations.map((value) => [value, value]), true, "全occupation_name");
+      rateTypeEl.value = "vs_hellowork";
+      for (const el of [viewModeEl, rateTypeEl, prefectureEl, majorEl, occupationEl, topNEl]) {
+        el.addEventListener("change", render);
+      }
+      render();
+    }
+
+    function render() {
+      const state = {
+        view: viewModeEl.value,
+        rateType: rateTypeEl.value,
+        prefecture: prefectureEl.value,
+        major: majorEl.value,
+        occupation: occupationEl.value,
+        topN: Number(topNEl.value),
+      };
+      const series = buildSeries(state);
+      renderSummary(series, state);
+      if (!series.length) {
+        chartWrapEl.innerHTML = '<div class="empty">条件に一致する系列がありません。フィルタを少し緩めてください。</div>';
+        legendEl.innerHTML = "";
+        return;
+      }
+      chartWrapEl.innerHTML = renderSvg(series, DATA.dates, 1260, 520);
+      legendEl.innerHTML = series.map((item, index) => `
+        <div class="legend-item">
+          <span class="swatch" style="background:${COLORS[index % COLORS.length]}"></span>
+          <span><strong>${escapeHtml(item.name)}</strong> 最新: ${item.latest.toFixed(4)}</span>
+        </div>
+      `).join("");
+    }
+
+    function buildSeries(state) {
+      const grouped = new Map();
+      for (const row of DATA.rows) {
+        const date = DATA.dates[row[0]];
+        const prefecture = DATA.prefectures[row[1]];
+        const major = DATA.majorCategories[row[2]];
+        const occupation = DATA.occupations[row[3]];
+        const hellowork = row[4];
+        const base = row[5];
+        const offer = row[6];
+        const divisor = state.rateType === "vs_hellowork" ? hellowork : base;
+        if (!divisor) continue;
+        const rate = offer / divisor;
+
+        let key = "";
+        let label = "";
+        if (state.view === "prefecture") {
+          if (state.major !== ALL && major !== state.major) continue;
+          if (state.occupation !== ALL && occupation !== state.occupation) continue;
+          key = prefecture;
+          label = prefecture;
+        } else if (state.view === "major") {
+          if (state.prefecture !== ALL && prefecture !== state.prefecture) continue;
+          if (state.occupation !== ALL && occupation !== state.occupation) continue;
+          key = major;
+          label = major;
+        } else if (state.view === "occupation") {
+          if (state.prefecture !== ALL && prefecture !== state.prefecture) continue;
+          if (state.major !== ALL && major !== state.major) continue;
+          key = occupation;
+          label = occupation;
+        } else {
+          if (state.major !== ALL && major !== state.major) continue;
+          if (state.prefecture !== ALL && prefecture !== state.prefecture) continue;
+          if (state.occupation !== ALL && occupation !== state.occupation) continue;
+          key = `${prefecture}__${occupation}`;
+          label = `${prefecture} / ${occupation}`;
+        }
+
+        if (!grouped.has(key)) {
+          grouped.set(key, { name: label, values: new Map() });
+        }
+        grouped.get(key).values.set(date, rate);
+      }
+
+      const series = [...grouped.values()].map((entry) => {
+        const points = DATA.dates.map((date) => entry.values.has(date) ? entry.values.get(date) : null);
+        const latest = [...points].reverse().find((value) => value !== null) ?? 0;
+        return { name: entry.name, points, latest };
+      });
+      series.sort((a, b) => b.latest - a.latest);
+      return series.slice(0, state.topN);
+    }
+
+    function renderSummary(series, state) {
+      const latestDate = DATA.dates[DATA.dates.length - 1];
+      summaryEl.innerHTML = `
+        <span><strong>表示モード:</strong> ${state.view}</span>
+        <span><strong>rate:</strong> ${DATA.rateTypes[state.rateType]}</span>
+        <span><strong>最新date:</strong> ${latestDate}</span>
+        <span><strong>系列数:</strong> ${series.length}</span>
+      `;
+    }
+
+    function renderSvg(series, labels, width, height) {
+      const left = 78;
+      const right = 24;
+      const top = 24;
+      const bottom = 56;
+      const innerW = width - left - right;
+      const innerH = height - top - bottom;
+      const allValues = series.flatMap((item) => item.points.filter((value) => value !== null));
+      const minValue = Math.min(...allValues);
+      const maxValue = Math.max(...allValues);
+      const pad = Math.max(0.01, (maxValue - minValue) * 0.08);
+      const yMin = Math.max(0, minValue - pad);
+      const yMax = maxValue + pad;
+
+      function xAt(index) {
+        if (labels.length === 1) return left + innerW / 2;
+        return left + innerW * index / (labels.length - 1);
+      }
+      function yAt(value) {
+        if (yMax === yMin) return top + innerH / 2;
+        const ratio = (value - yMin) / (yMax - yMin);
+        return top + innerH * (1 - ratio);
+      }
+
+      const grid = [];
+      for (let step = 0; step < 6; step += 1) {
+        const value = yMin + (yMax - yMin) * step / 5;
+        const y = yAt(value);
+        grid.push(`<line x1="${left}" y1="${y.toFixed(2)}" x2="${width-right}" y2="${y.toFixed(2)}" stroke="#d6d3d1" stroke-width="1" />`);
+        grid.push(`<text x="${left-10}" y="${(y+4).toFixed(2)}" text-anchor="end" font-size="12" fill="#57534e">${value.toFixed(3)}</text>`);
+      }
+
+      const xTicks = [];
+      const tickIndices = [...new Set([0, Math.floor(labels.length / 4), Math.floor(labels.length / 2), Math.floor(labels.length * 3 / 4), labels.length - 1])];
+      for (const idx of tickIndices) {
+        const x = xAt(idx);
+        xTicks.push(`<line x1="${x.toFixed(2)}" y1="${top}" x2="${x.toFixed(2)}" y2="${height-bottom}" stroke="#eee7dc" stroke-width="1" />`);
+        xTicks.push(`<text x="${x.toFixed(2)}" y="${height-20}" text-anchor="middle" font-size="12" fill="#57534e">${labels[idx]}</text>`);
+      }
+
+      const lines = [];
+      const endLabels = [];
+      series.forEach((item, index) => {
+        const color = COLORS[index % COLORS.length];
+        const filtered = item.points.map((value, pointIndex) => [value, pointIndex]).filter(([value]) => value !== null);
+        const path = filtered.map(([value, pointIndex]) => `${xAt(pointIndex).toFixed(2)},${yAt(value).toFixed(2)}`).join(" ");
+        lines.push(`<polyline fill="none" stroke="${color}" stroke-width="2.5" points="${path}" />`);
+        const last = filtered[filtered.length - 1];
+        const endX = xAt(last[1]);
+        const endY = yAt(last[0]);
+        lines.push(`<circle cx="${endX.toFixed(2)}" cy="${endY.toFixed(2)}" r="3.5" fill="${color}" />`);
+        endLabels.push(`<text x="${Math.min(width-right-2, endX + 8).toFixed(2)}" y="${(endY+4).toFixed(2)}" font-size="11" fill="${color}">${index + 1}</text>`);
+      });
+
+      return `
+        <svg viewBox="0 0 ${width} ${height}" width="100%" height="auto" role="img" aria-label="折れ線グラフ">
+          <rect x="0" y="0" width="${width}" height="${height}" rx="18" fill="#fffdf8" />
+          ${grid.join("")}
+          ${xTicks.join("")}
+          <line x1="${left}" y1="${height-bottom}" x2="${width-right}" y2="${height-bottom}" stroke="#a8a29e" stroke-width="1.5" />
+          <line x1="${left}" y1="${top}" x2="${left}" y2="${height-bottom}" stroke="#a8a29e" stroke-width="1.5" />
+          ${lines.join("")}
+          ${endLabels.join("")}
+        </svg>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    init();
+  </script>
+</body>
+</html>
