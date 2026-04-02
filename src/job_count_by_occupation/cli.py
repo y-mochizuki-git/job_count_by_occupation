@@ -18,6 +18,10 @@ from job_count_by_occupation.coverage import (
     estimate_occupation_national_jobs,
 )
 from job_count_by_occupation.estat import fetch_job_counts_from_year, fetch_latest_job_counts
+from job_count_by_occupation.offer_rate_chart import (
+    create_sample_offer_rate_csv,
+    generate_offer_rate_explorer_html,
+)
 from job_count_by_occupation.prefecture import (
     build_prefecture_major_occupation_scenarios,
     estimate_prefecture_occupation_jobs,
@@ -122,6 +126,28 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=4,
         help="開始月。default: 4",
+    )
+
+    offer_rate_sample_parser = subparsers.add_parser("offer-rate-sample", help="応募率可視化用のサンプルCSVを作ります。")
+    offer_rate_sample_parser.add_argument(
+        "--output-csv",
+        type=Path,
+        default=Path("outputs/sample_offer_rate_input.csv"),
+        help="出力CSV。default: outputs/sample_offer_rate_input.csv",
+    )
+
+    offer_rate_chart_parser = subparsers.add_parser("offer-rate-chart", help="応募率の汎用探索HTMLを作ります。")
+    offer_rate_chart_parser.add_argument(
+        "--input-csv",
+        type=Path,
+        default=Path("outputs/sample_offer_rate_input.csv"),
+        help="入力CSV。default: outputs/sample_offer_rate_input.csv",
+    )
+    offer_rate_chart_parser.add_argument(
+        "--output-html",
+        type=Path,
+        default=Path("outputs/offer_rate_explorer.html"),
+        help="出力HTML。default: outputs/offer_rate_explorer.html",
     )
 
     aggregate_parser = subparsers.add_parser("aggregate-major", help="大分類ごとの月次集計CSVを作ります。")
@@ -456,6 +482,19 @@ def main() -> int:
             output_path=args.output_html,
             start_year=args.start_year,
             start_month=args.start_month,
+        )
+        print(f"出力: {output_path}")
+        return 0
+
+    if args.command == "offer-rate-sample":
+        output_path = create_sample_offer_rate_csv(args.output_csv)
+        print(f"出力: {output_path}")
+        return 0
+
+    if args.command == "offer-rate-chart":
+        output_path = generate_offer_rate_explorer_html(
+            input_csv=args.input_csv,
+            output_html=args.output_html,
         )
         print(f"出力: {output_path}")
         return 0
