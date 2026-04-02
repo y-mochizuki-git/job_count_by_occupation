@@ -43,6 +43,7 @@ class OfferRateChartTests(unittest.TestCase):
             self.assertIn("job_offer_count / prefecture_hellowork_job_count", text)
             self.assertIn("北海道", text)
             self.assertIn("2026-02", text)
+            self.assertIn('<option value="total">合算</option>', text)
 
     def test_generate_offer_rate_explorer_html_treats_blank_offer_as_zero(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:

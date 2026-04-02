@@ -246,6 +246,7 @@ def _build_offer_rate_explorer_html(dataset: Dict[str, object]) -> str:
       <div class="controls">
         <label>表示モード
           <select id="viewMode">
+            <option value="total">合算</option>
             <option value="prefecture">prefecture別</option>
             <option value="major">major_category別</option>
             <option value="occupation">occupation_name別</option>
@@ -363,13 +364,13 @@ def _build_offer_rate_explorer_html(dataset: Dict[str, object]) -> str:
         const hellowork = row[4];
         const base = row[5];
         const offer = row[6];
-        const divisor = state.rateType === "vs_hellowork" ? hellowork : base;
-        if (!divisor) continue;
-        const rate = offer / divisor;
 
         let key = "";
         let label = "";
-        if (state.view === "prefecture") {{
+        if (state.view === "total") {{
+          key = "__total__";
+          label = "全体合算";
+        }} else if (state.view === "prefecture") {{
           if (state.major !== ALL && major !== state.major) continue;
           if (state.occupation !== ALL && occupation !== state.occupation) continue;
           key = prefecture;
@@ -395,22 +396,45 @@ def _build_offer_rate_explorer_html(dataset: Dict[str, object]) -> str:
         if (!grouped.has(key)) {{
           grouped.set(key, {{ name: label, values: new Map() }});
         }}
-        grouped.get(key).values.set(date, rate);
+        const entry = grouped.get(key);
+        if (!entry.values.has(date)) {{
+          entry.values.set(date, {{ hellowork: 0, base: 0, offer: 0 }});
+        }}
+        const bucket = entry.values.get(date);
+        bucket.hellowork += hellowork;
+        bucket.base += base;
+        bucket.offer += offer;
       }}
 
       const series = [...grouped.values()].map((entry) => {{
-        const points = DATA.dates.map((date) => entry.values.has(date) ? entry.values.get(date) : null);
+        const points = DATA.dates.map((date) => {{
+          if (!entry.values.has(date)) return null;
+          const bucket = entry.values.get(date);
+          const divisor = state.rateType === "vs_hellowork" ? bucket.hellowork : bucket.base;
+          if (!divisor) return null;
+          return bucket.offer / divisor;
+        }});
         const latest = [...points].reverse().find((value) => value !== null) ?? 0;
         return {{ name: entry.name, points, latest }};
       }});
       series.sort((a, b) => b.latest - a.latest);
+      if (state.view === "total") {{
+        return series.slice(0, 1);
+      }}
       return series.slice(0, state.topN);
     }}
 
     function renderSummary(series, state) {{
       const latestDate = DATA.dates[DATA.dates.length - 1];
+      const modeLabelMap = {{
+        total: "合算",
+        prefecture: "prefecture別",
+        major: "major_category別",
+        occupation: "occupation_name別",
+        prefecture_occupation: "prefecture & occupation_name別",
+      }};
       summaryEl.innerHTML = `
-        <span><strong>表示モード:</strong> ${{state.view}}</span>
+        <span><strong>表示モード:</strong> ${{modeLabelMap[state.view]}}</span>
         <span><strong>rate:</strong> ${{DATA.rateTypes[state.rateType]}}</span>
         <span><strong>最新date:</strong> ${{latestDate}}</span>
         <span><strong>系列数:</strong> ${{series.length}}</span>
